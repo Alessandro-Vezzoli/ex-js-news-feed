@@ -25,13 +25,18 @@
         <div class="col-6 d-flex align-items-center">
           <div class="p-4">Filtra per tags:</div>
           <select
-            class="form-select-modified justify-content-start"
+            id="selected"
+            class="form-select"
             aria-label="Default select example"
+            onchange="ciclo()"
           >
-            <option selected>Tutti i tags</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="">Seleziona un Filtro per tipo</option>
+
+            <option value="arte">Arte</option>
+            <option value="tech">Tech</option>
+            <option value="viaggi">Viaggi</option>
+            <option value="cucina">Cucina</option>
+            <option value="geo">Geo</option>
           </select>
         </div>
         <div class="col-6 d-flex align-items-center justify-content-end">
@@ -47,6 +52,9 @@
             </label>
           </div>
         </div>
+      </div>
+      <div class="mt-4">
+        <div id="card-articles" class="p-3"></div>
       </div>
     </div>
 
