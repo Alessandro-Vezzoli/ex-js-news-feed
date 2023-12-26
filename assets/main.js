@@ -7,7 +7,7 @@ const articles = [
     description:
       "Un breve articolo sulla recente scoperta di una specie di papera di gomma mai vista prima.",
     image: "rubber-duck.jpg",
-    type: "geo , tech",
+    type: ["geo", "tech"],
   },
   {
     title: "Viaggio culinario: alla ricerca dei sapori perduti",
@@ -34,7 +34,7 @@ const articles = [
     description:
       "Un'analisi delle tendenze e delle sfide nell'arte contemporanea, con interviste a artisti emergenti.",
     image: "modern-art.jpg",
-    type: "arte , tech",
+    type: ["arte", "tech"],
   },
 ];
 
@@ -44,8 +44,8 @@ function ciclo() {
   let localarticle = articles;
 
   if (type) {
-    localarticle = localarticle.filter(
-      (typeArticles) => typeArticles.type == type
+    localarticle = localarticle.filter((typeArticles) =>
+      typeArticles.type.includes(type)
     );
   }
   //creare literals per associare carda ad array
@@ -61,7 +61,7 @@ function ciclo() {
   
   
       <p class="card-text">${articles.description}</p>
-      <a href="#" class="btn btn-primary">${articles.type}</a>
+      <a href="#" class="btn btn-primary">${articles.type} </a>
     </div>
   </div>`;
   });
