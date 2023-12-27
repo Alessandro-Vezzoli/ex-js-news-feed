@@ -53,19 +53,20 @@ function ciclo() {
   localarticle.forEach((articles) => {
     cardArticle += `
     <div class="card mb-4 p-4 " style="width: 100%;">
-    <img src="./images/${articles.image}" class="card-img-top" alt="${articles.image}">
+    
     <div class="card-body">
-      <h5 class="card-title">${articles.title}</h5>
-      <h6 class="card-title">pubblcato da ${articles.author}</h6>
+      <h2 class="card-title">${articles.title}</h2>
+      <h5 class="card-title">pubblicato da ${articles.author}</h5>
       <p class="card-title">in data ${articles.date}</p>
   
   
       <p class="card-text">${articles.description}</p>
-      <a href="#" class="btn btn-primary">${articles.type} </a>
+      <img src="./images/${articles.image}" class="card-img-top mb-3 rounded" alt="${articles.image}">
+      <a  class="btn btn-primary ">${articles.type} </a>
     </div>
   </div>`;
   });
   document.getElementById("card-articles").innerHTML = cardArticle;
 }
 ciclo();
-//inserire funzione salva
+//inserire funzione salvato
