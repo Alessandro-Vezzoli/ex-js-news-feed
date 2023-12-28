@@ -54,8 +54,23 @@ function ciclo() {
     cardArticle += `
     <div class="card mb-4 p-4 " style="width: 100%;">
     
+
     <div class="card-body">
-      <h2 class="card-title">${articles.title}</h2>
+    <div class="container ">
+  <div class="row">
+  <div class="col-10" style="padding-left: 0px;">
+    <h2 class="card-title ">${articles.title}</h2>
+    </div>
+    <div class="col-2 d-flex justify-content-end button-save">
+    <button type="button" class="btn"><i class="fa-2x fa-regular fa-bookmark"></i></button>  
+    </div>
+    
+    
+  </div>
+</div>
+    
+
+      
       <h5 class="card-title">pubblicato da ${articles.author}</h5>
       <p class="card-title">in data ${articles.date}</p>
   
