@@ -27,3 +27,31 @@
 .button-save {
   cursor: pointer;
 }
+
+.btn-green {
+  background-color: green;
+  border-color: green;
+  color: white; /* Cambia il colore del testo se necessario */
+}
+
+.btn-blue {
+  background-color: blue;
+  border-color: blue;
+  color: white;
+}
+
+.btn-purple {
+  background-color: purple;
+  border-color: purple;
+  color: white;
+}
+.btn-orange {
+  background-color: orange;
+  border-color: orange;
+  color: white;
+}
+.btn-yellow {
+  background-color: yellow;
+  border-color: yellow;
+  color: white;
+}

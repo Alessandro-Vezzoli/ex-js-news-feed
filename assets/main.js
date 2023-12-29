@@ -49,38 +49,49 @@ function ciclo() {
     );
   }
   //creare literals per associare carda ad array
+
   let cardArticle = "";
   localarticle.forEach((articles) => {
+    let buttonClass = ""; // Inizializza la stringa delle classi del pulsante
+
+    // Aggiungi la classe in base al tipo
+    if (articles.type.includes("geo")) {
+      buttonClass = "btn-green";
+    } else if (articles.type.includes("tech")) {
+      buttonClass = "btn-blue";
+    } else if (articles.type.includes("cucina")) {
+      buttonClass = "btn-purple";
+    } else if (articles.type.includes("viaggi")) {
+      buttonClass = "btn-orange";
+    } else if (articles.type.includes("arte")) {
+      buttonClass = "btn-yellow";
+    }
     cardArticle += `
-    <div class="card mb-4 p-4 " style="width: 100%;">
-    
-
-    <div class="card-body">
-    <div class="container ">
-  <div class="row">
-  <div class="col-10" style="padding-left: 0px;">
-    <h2 class="card-title ">${articles.title}</h2>
-    </div>
-    <div class="col-2 d-flex justify-content-end button-save">
-    <button type="button" class="btn"><i class="fa-2x fa-regular fa-bookmark"></i></button>  
-    </div>
-    
-    
-  </div>
-</div>
-    
-
+    <div class="card mb-4 p-4" style="width: 100%;">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-10" style="padding-left: 0px;">
+              <h2 class="card-title">${articles.title}</h2>
+            </div>
+            <div class="col-2 d-flex justify-content-end button-save">
+              <button type="button" class="btn ">
+                <i class="fa-2x fa-regular fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       
-      <h5 class="card-title">pubblicato da ${articles.author}</h5>
-      <p class="card-title">in data ${articles.date}</p>
+        <h5 class="card-title">pubblicato da ${articles.author}</h5>
+        <p class="card-title">in data ${articles.date}</p>
   
-  
-      <p class="card-text">${articles.description}</p>
-      <img src="./images/${articles.image}" class="card-img-top mb-3 rounded" alt="${articles.image}">
-      <a  class="btn btn-primary ">${articles.type} </a>
-    </div>
-  </div>`;
+        <p class="card-text">${articles.description}</p>
+        <img src="./images/${articles.image}" class="card-img-top mb-3 rounded" alt="${articles.image}">
+        <a class="btn ${buttonClass} ">${articles.type}</a>
+      </div>
+    </div>`;
   });
+
   document.getElementById("card-articles").innerHTML = cardArticle;
 }
 ciclo();
