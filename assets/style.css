@@ -24,6 +24,7 @@
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .button-save {
   cursor: pointer;
 }
@@ -31,27 +32,37 @@
 .btn-green {
   background-color: green;
   border-color: green;
-  color: white; /* Cambia il colore del testo se necessario */
+  color: white;
+  cursor: default;
 }
 
 .btn-blue {
   background-color: blue;
   border-color: blue;
   color: white;
+  cursor: default;
 }
 
 .btn-purple {
   background-color: purple;
   border-color: purple;
   color: white;
+  cursor: default;
 }
 .btn-orange {
   background-color: orange;
   border-color: orange;
   color: white;
+  cursor: default;
 }
 .btn-yellow {
-  background-color: yellow;
-  border-color: yellow;
+  background-color: rgb(216, 216, 2);
+  border-color: rgb(216, 216, 2);
   color: white;
+  cursor: default;
+}
+
+.btn-disabled {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
 }
