@@ -39,177 +39,105 @@ const articles = [
 ];
 
 //INSERIRE funzione filtro
-function ciclo() {
-  const type = document.getElementById("selected").value;
-  let localarticle = articles;
-
-  if (type) {
-    localarticle = localarticle.filter((typeArticles) =>
-      typeArticles.type.includes(type)
-    );
-  }
-  //creare literals per associare carda ad array
-
-  let cardArticle = "";
-  localarticle.forEach((articles) => {
-    let buttonClass = "";
-
-    // Aggiungi la classe in base al tipo
-    function getButtonClass(type) {
-      if (type === "geo") {
-        return "btn-green";
-      } else if (type === "tech") {
-        return "btn-blue";
-      } else if (type === "cucina") {
-        return "btn-purple";
-      } else if (type === "viaggi") {
-        return "btn-orange";
-      } else if (type === "arte") {
-        return "btn-yellow";
-      }
-      return "";
-    }
-    cardArticle += `
-    <div class="card mb-4 p-4" style="width: 100%;">
-      <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-10" style="padding-left: 0px;">
-              <h2 class="card-title">${articles.title}</h2>
-            </div>
-            <div class="col-2 d-flex justify-content-end button-save">
-            <button type="button" class="btn btn-save" onclick="salvaArticolo('${
-              articles.title
-            }')">
-            <i class="fa-2x fa-regular fa-bookmark"></i>
-          </button>
-            </div>
-          </div>
-        </div>
-      
-        <h5 class="card-title">pubblicato da ${articles.author}</h5>
-        <p class="card-title">in data ${articles.date}</p>
-  
-        <p class="card-text">${articles.description}</p>
-        <img src="./images/${
-          articles.image
-        }" class="card-img-top mb-3 rounded" alt="${articles.image}">
-        ${articles.type
-          .map(
-            (articleType) =>
-              `<a class="btn btn-disabled  ${getButtonClass(
-                articleType
-              )}">${articleType}</a>`
-          )
-          .join(" ")}
-      </div>
-    </div>`;
-  });
-
-  document.getElementById("card-articles").innerHTML = cardArticle;
-}
-ciclo();
-
-//inserire funzione salvato
 let articoliSalvati = [];
 
+function ciclo() {
+  const type = document.getElementById("selected").value;
+  let localArticles = articles;
+
+  if (type) {
+    localArticles = localArticles.filter((article) =>
+      article.type.includes(type)
+    );
+  }
+
+  displayArticles(localArticles);
+}
+
+// card articolo
+function displayArticles(articles) {
+  const cardArticles = articles
+    .map((article) => {
+      const buttonClass = getButtonClass(article.type[0]);
+
+      return `
+            <div class="card mb-4 p-4" style="width: 100%;">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-10" style="padding-left: 0px;">
+                                <h2 class="card-title">${article.title}</h2>
+                            </div>
+                            <div class="col-2 d-flex justify-content-end button-save">
+                                <button type="button" class="btn btn-save" onclick="salvaArticolo('${
+                                  article.title
+                                }')">
+                                    <i class="fa-2x ${
+                                      articoliSalvati.some(
+                                        (savedArticle) =>
+                                          savedArticle.title === article.title
+                                      )
+                                        ? "fa-solid"
+                                        : "fa-regular"
+                                    } fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="card-title">pubblicato da ${article.author}</h5>
+                    <p class="card-title">in data ${article.date}</p>
+
+                    <p class="card-text">${article.description}</p>
+                    <img src="./images/${
+                      article.image
+                    }" class="card-img-top mb-3 rounded" alt="${article.image}">
+                    <a class="btn btn-disabled ${buttonClass}">${
+        article.type[0]
+      }</a>
+                </div>
+            </div>`;
+    })
+    .join("");
+
+  document.getElementById("card-articles").innerHTML = cardArticles;
+}
+
+function getButtonClass(type) {
+  const typeClassMap = {
+    geo: "btn-green",
+    tech: "btn-blue",
+    cucina: "btn-purple",
+    viaggi: "btn-orange",
+    arte: "btn-yellow",
+  };
+
+  return typeClassMap[type] || "";
+}
+
 function salvaArticolo(titolo) {
-  const indiceArticolo = articoliSalvati.findIndex(
-    (articolo) => articolo.title === titolo
+  const index = articoliSalvati.findIndex(
+    (savedArticle) => savedArticle.title === titolo
   );
 
-  if (indiceArticolo === -1) {
-    const articoloDaSalvare = articles.find(
-      (articolo) => articolo.title === titolo
-    );
-    articoliSalvati.push(articoloDaSalvare);
-
-    const iconaBookmark = document.querySelector(
-      `[onclick="salvaArticolo('${titolo}')"] i`
-    );
-    iconaBookmark.classList.remove("fa-regular");
-    iconaBookmark.classList.add("fa-solid");
+  if (index === -1) {
+    const articleToSave = articles.find((article) => article.title === titolo);
+    articoliSalvati.push(articleToSave);
   } else {
-    articoliSalvati.splice(indiceArticolo, 1);
-
-    const iconaBookmark = document.querySelector(
-      `[onclick="salvaArticolo('${titolo}')"] i`
-    );
-    iconaBookmark.classList.remove("fa-solid");
-    iconaBookmark.classList.add("fa-regular");
+    articoliSalvati.splice(index, 1);
   }
+
+  ciclo();
 }
-function visualizzaArticoliSalvati() {
-  let cardArticle = "";
-  articoliSalvati.forEach((articles) => {
-    let buttonClass = "";
 
-    function getButtonClass(type) {
-      if (type === "geo") {
-        return "btn-green";
-      } else if (type === "tech") {
-        return "btn-blue";
-      } else if (type === "cucina") {
-        return "btn-purple";
-      } else if (type === "viaggi") {
-        return "btn-orange";
-      } else if (type === "arte") {
-        return "btn-yellow";
-      }
-      return "";
-    }
-
-    const isSaved = articoliSalvati.some(
-      (articolo) => articolo.title === articles.title
-    );
-
-    cardArticle += `
-        <div class="card mb-4 p-4" style="width: 100%;">
-          <div class="card-body">
-            <div class="container">
-              <div class="row">
-                <div class="col-10" style="padding-left: 0px;">
-                  <h2 class="card-title">${articles.title}</h2>
-                </div>
-                <div class="col-2 d-flex justify-content-end button-save">
-                  <button type="button" class="btn btn-save" onclick="salvaArticolo('${
-                    articles.title
-                  }')">
-                    <i class="fa-2x ${
-                      isSaved ? "fa-solid" : "fa-regular"
-                    } fa-bookmark"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <h5 class="card-title">pubblicato da ${articles.author}</h5>
-            <p class="card-title">in data ${articles.date}</p>
-      
-            <p class="card-text">${articles.description}</p>
-            <img src="./images/${
-              articles.image
-            }" class="card-img-top mb-3 rounded" alt="${articles.image}">
-            ${articles.type
-              .map(
-                (articleType) =>
-                  `<a class="btn btn-disabled  ${getButtonClass(
-                    articleType
-                  )}">${articleType}</a>`
-              )
-              .join(" ")}
-          </div>
-        </div>`;
-  });
-
-  document.getElementById("card-articles").innerHTML = cardArticle;
-}
 function handleCheckboxChange() {
   const checkbox = document.getElementById("checkArticoliSalvati");
 
   if (checkbox.checked) {
-    visualizzaArticoliSalvati();
+    displayArticles(articoliSalvati);
   } else {
     ciclo();
   }
 }
+
+ciclo();

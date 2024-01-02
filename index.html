@@ -20,6 +20,7 @@
       src="https://kit.fontawesome.com/e37e20641d.js"
       crossorigin="anonymous"
     ></script>
+    <link href="./assets/style.css" rel="stylesheet" />
   </head>
 
   <body class="bg-personalizated">
@@ -35,7 +36,6 @@
             onchange="ciclo()"
           >
             <option value="">Seleziona un Filtro per tipo</option>
-
             <option value="arte">Arte</option>
             <option value="tech">Tech</option>
             <option value="viaggi">Viaggi</option>
@@ -48,13 +48,12 @@
             <input
               class="form-check-input"
               type="checkbox"
-              value="ArticoliSalvati"
               id="checkArticoliSalvati"
               onchange="handleCheckboxChange()"
             />
-            <label class="form-check-label" for="checkArticoliSalvati">
-              Solo news salvate
-            </label>
+            <label class="form-check-label" for="checkArticoliSalvati"
+              >Solo news salvate</label
+            >
           </div>
         </div>
       </div>
@@ -62,7 +61,6 @@
         <div id="card-articles" class="p-3"></div>
       </div>
     </div>
-    <link href="./assets/style.css" rel="stylesheet" />
     <script src="./assets/main.js"></script>
   </body>
 </html>
