@@ -129,6 +129,7 @@ function salvaArticolo(titolo) {
 
   ciclo();
 }
+document.addEventListener("click", handleCheckboxChange);
 
 function handleCheckboxChange() {
   const checkbox = document.getElementById("checkArticoliSalvati");
