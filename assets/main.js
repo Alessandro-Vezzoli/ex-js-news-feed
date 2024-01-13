@@ -3,7 +3,7 @@ const articles = [
   {
     title: "Scoperta di una nuova specie di papera di gomma",
     author: "Diana Rossi",
-    date: "10/01/2023",
+    date: "2023-01-10",
     description:
       "Un breve articolo sulla recente scoperta di una specie di papera di gomma mai vista prima.",
     image: "rubber-duck.jpg",
@@ -12,7 +12,7 @@ const articles = [
   {
     title: "Viaggio culinario: alla ricerca dei sapori perduti",
     author: "Marco Bianchi",
-    date: "20/02/2023",
+    date: "2023-02-20",
     description:
       "Esplorazione di tradizioni culinarie dimenticate e la ricerca di sapori autentici.",
     image: "kitchen-food.jpg",
@@ -21,7 +21,7 @@ const articles = [
   {
     title: "Esplorando le profondità marine: il mistero degli abissi",
     author: "Alessandra Marino",
-    date: "10/03/2023",
+    date: "2023-03-10",
     description:
       "Un viaggio nelle profondità dell'oceano alla scoperta di creature misteriose e inesplorate.",
     image: "deep-sea.jpg",
@@ -30,7 +30,7 @@ const articles = [
   {
     title: "Arte moderna: oltre i confini convenzionali",
     author: "Gabriele Neri",
-    date: "05/04/2023",
+    date: "2023-04-05",
     description:
       "Un'analisi delle tendenze e delle sfide nell'arte contemporanea, con interviste a artisti emergenti.",
     image: "modern-art.jpg",
@@ -80,6 +80,10 @@ function displayArticles(articles) {
         })
         .join(" ");
 
+      // Cambio formato data
+      const formattedDate = formatDate(article.date);
+
+      console.log(formattedDate);
       return `
             <div class="card mb-4 p-4" style="width: 100%;">
                 <div class="card-body">
@@ -106,7 +110,7 @@ function displayArticles(articles) {
                     </div>
 
                     <h5 class="card-title">pubblicato da ${article.author}</h5>
-                    <p class="card-title">in data ${article.date}</p>
+                    <p class="card-title">in data ${formattedDate}</p>
 
                     <p class="card-text">${article.description}</p>
                     <img src="./images/${
@@ -132,6 +136,13 @@ function getButtonClass(type) {
   };
 
   return typeClassMap[type] || "";
+}
+
+// Funzione per formattare la data
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("it-IT", options);
 }
 
 //funzione salva articolo
