@@ -58,7 +58,10 @@ function ciclo() {
 function displayArticles(articles) {
   const cardArticles = articles
     .map((article) => {
-      const buttonClass = getButtonClass(article.type[0]);
+      const buttonClass1 = getButtonClass(article.type[0]);
+      const buttonClass2 = article.type[1]
+        ? getButtonClass(article.type[1])
+        : "";
 
       return `
             <div class="card mb-4 p-4" style="width: 100%;">
@@ -92,9 +95,14 @@ function displayArticles(articles) {
                     <img src="./images/${
                       article.image
                     }" class="card-img-top mb-3 rounded" alt="${article.image}">
-                    <a class="btn btn-disabled ${buttonClass}">${
+                    <a class="btn btn-disabled ${buttonClass1}">${
         article.type[0]
       }</a>
+                    ${
+                      buttonClass2
+                        ? `<a class="btn btn-disabled ${buttonClass2}">${article.type[1]}</a>`
+                        : ""
+                    }
                 </div>
             </div>`;
     })
