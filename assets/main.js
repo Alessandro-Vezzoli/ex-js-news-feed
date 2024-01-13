@@ -73,10 +73,12 @@ function ciclo() {
 function displayArticles(articles) {
   const cardArticles = articles
     .map((article) => {
-      const buttonClass1 = getButtonClass(article.type[0]);
-      const buttonClass2 = article.type[1]
-        ? getButtonClass(article.type[1])
-        : "";
+      const buttonClasses = article.type.map((type) => getButtonClass(type));
+      const buttons = buttonClasses
+        .map((buttonClass, index) => {
+          return `<a class="btn btn-disabled ${buttonClass}">${article.type[index]}</a>`;
+        })
+        .join(" ");
 
       return `
             <div class="card mb-4 p-4" style="width: 100%;">
@@ -110,14 +112,7 @@ function displayArticles(articles) {
                     <img src="./images/${
                       article.image
                     }" class="card-img-top mb-3 rounded" alt="${article.image}">
-                    <a class="btn btn-disabled ${buttonClass1}">${
-        article.type[0]
-      }</a>
-                    ${
-                      buttonClass2
-                        ? `<a class="btn btn-disabled ${buttonClass2}">${article.type[1]}</a>`
-                        : ""
-                    }
+                    ${buttons}
                 </div>
             </div>`;
     })
@@ -126,6 +121,7 @@ function displayArticles(articles) {
   document.getElementById("card-articles").innerHTML = cardArticles;
 }
 
+// color button
 function getButtonClass(type) {
   const typeClassMap = {
     geo: "btn-green",
@@ -138,6 +134,7 @@ function getButtonClass(type) {
   return typeClassMap[type] || "";
 }
 
+//funzione salva articolo
 function salvaArticolo(titolo) {
   const index = articoliSalvati.findIndex(
     (savedArticle) => savedArticle.title === titolo
@@ -152,6 +149,8 @@ function salvaArticolo(titolo) {
 
   ciclo();
 }
+
+//funzione cambia check o non check
 document.addEventListener("click", handleCheckboxChange);
 
 function handleCheckboxChange() {
