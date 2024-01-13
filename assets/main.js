@@ -39,11 +39,26 @@ const articles = [
 ];
 
 //INSERIRE funzione filtro
-let articoliSalvati = [];
+
+const articoliSalvati = [];
 
 function ciclo() {
   const type = document.getElementById("selected").value;
+  const checkbox = document.getElementById("checkArticoliSalvati");
+
   let localArticles = articles;
+
+  if (checkbox.checked) {
+    if (type) {
+      const savedByType = articoliSalvati.filter((savedArticle) =>
+        savedArticle.type.includes(type)
+      );
+      displayArticles(savedByType);
+    } else {
+      displayArticles(articoliSalvati);
+    }
+    return;
+  }
 
   if (type) {
     localArticles = localArticles.filter((article) =>
@@ -141,12 +156,7 @@ document.addEventListener("click", handleCheckboxChange);
 
 function handleCheckboxChange() {
   const checkbox = document.getElementById("checkArticoliSalvati");
-
-  if (checkbox.checked) {
-    displayArticles(articoliSalvati);
-  } else {
-    ciclo();
-  }
+  ciclo();
 }
 
 ciclo();
